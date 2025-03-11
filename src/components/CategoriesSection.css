@@ -1,0 +1,102 @@
+/* Seção de Categorias */
+.categories {
+  width: 100%;
+  max-width: 1800px;  /* Aumente o valor conforme necessário */
+  margin: 0 auto;      /* Centraliza no mesmo padrão do banner */
+  text-align: center;
+  padding-top: 20px; 
+}
+
+.categories h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Container do slider */
+.slider-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  /* Remover max-width e margin aqui, 
+     pois já estamos definindo no .categories */
+  /* padding: 0 20px;  <- remova se não quiser padding lateral extra */
+}
+
+
+/* Container rolável dos cartões */
+.category-cards {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  padding: 10px 0;  /* só espaçamento vertical, se desejar */
+}
+
+/* Botões de scroll */
+.scroll-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 2;
+  color: #333;
+  transition: color 0.3s;
+  padding: 10px ;
+}
+
+.scroll-button:hover {
+  color: #eb4848;
+}
+
+
+/* Cada cartão de categoria */
+.category-card {
+  flex: 0 0 auto;
+  width: 180px;
+  height: 220px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Envolve a imagem */
+.image-wrapper {
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Imagem padronizada */
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Descrição fixa no rodapé do card */
+.category-description {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #eee;
+  background-color: #fff;
+}
+
+.category-description h3 {
+  font-size: 1rem;
+  color: #333;
+  margin: 0;
+}

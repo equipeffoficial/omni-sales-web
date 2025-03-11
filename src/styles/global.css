@@ -1,0 +1,109 @@
+/* Reset de estilos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Garantir que a altura ocupe toda a tela */
+html, body {
+  height: 100%;
+  background-color: #f5f5f5;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estrutura principal */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+ 
+/* Header fixo */
+header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: #eb4848; /* Ajustando para cobrir toda a largura */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 15px 0;
+  left: 0;
+  right: 0;
+}
+
+/* Container do header - Centraliza os componentes, mas não afeta o fundo vermelho */
+.container {
+  display: flex;
+  justify-content: center; /* Centraliza os itens no meio da página */
+  align-items: center;
+  gap: 20px; /* Espaço entre os elementos */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 100px; /* Ajusta a altura do container */
+  background: transparent; /* Garante que o fundo vermelho cubra toda a largura */
+}
+
+/* Ajuste do logo */
+.logo {
+  height: 40px; /* Reduzindo o tamanho da imagem */
+  width: auto;
+  display: block;
+}
+
+/* Ajuste do campo de busca */
+.search-bar {
+  padding: 12px;
+  width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  
+}
+
+/* Ajuste do menu de navegação */
+.nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  padding: 0;
+}
+
+.nav li {
+  cursor: pointer;
+  font-weight: bold;
+  color: #eeecec;
+  transition: color 0.3s;
+}
+
+.nav li:hover {
+  color: #fad9a8;
+}
+
+/* Adiciona margem no topo do conteúdo para não ficar coberto pelo header */
+.content {
+  flex-grow: 1;
+  padding-top: 5px; /* Garante espaço abaixo do header */
+  overflow-y: auto;
+}
+ 
+/* Footer fixo no final */
+footer {
+  /*position: fixed;*/
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #e2e2e2;
+  color: rgb(104, 103, 103);
+  text-align: center;
+  padding: 15px;
+}

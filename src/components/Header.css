@@ -1,0 +1,117 @@
+/* ----- HEADER ----- */
+.header {
+  background-color: #eb4848;
+  padding: 15px 0;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  /* Você pode manter ou ajustar o box-shadow existente se desejar */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative; /* Necessário para posicionar o pseudo-elemento */
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;  /* Ajuste conforme a intensidade do efeito desejado */
+  left: 0;
+  right: 0;
+  height: 10px;   /* Define a "altura" do efeito */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), transparent);
+  /* O gradiente cria o efeito de sombra que dá a impressão de elevação */
+}
+
+/* Container do Header */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Logo */
+.logo {
+  height: 50px;
+  width: auto;
+}
+
+/* ----- BARRA DE PESQUISA ----- */
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 5px; /* Deixando mais arredondado para parecer com o Mercado Livre */
+  padding: 1px 10px;
+  width: 450px;
+  box-shadow: none;
+  border: 1px solid transparent; /* Torna a borda invisível */
+}
+
+/* Campo de busca */
+.search-bar {
+  flex: 1;
+  padding: 10px;
+  border: none !important;  /* Força a remoção da borda */
+  outline: none !important; /* Remove o contorno ao clicar */
+  font-size: 16px;
+  background: none;
+  box-shadow: none !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Remove bordas de navegadores específicos */
+.search-bar::-webkit-search-decoration,
+.search-bar::-webkit-search-cancel-button,
+.search-bar::-webkit-search-results-button,
+.search-bar::-webkit-search-results-decoration {
+  display: none;
+}
+
+.search-bar:focus {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Ícone dentro do input */
+.search-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #888;
+  font-size: 18px;
+  padding: 5px;
+}
+
+.search-button:hover {
+  color: #555;
+}
+
+/* ----- ÍCONES DO LADO DIREITO ----- */
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Estilização para cada ícone */
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  cursor: pointer;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.icon-container:hover {
+  color: #fad9a8;
+}
