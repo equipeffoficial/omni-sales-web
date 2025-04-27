@@ -1,11 +1,8 @@
-// src/components/CategoriesSection.tsx
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CategoriesSection.css';
-import { Category } from '../models/Category';
-import { fetchCategories } from '../services/CategoryService';
+import { SectionConfig, SectionItem } from '../models/SectionConfig';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import { SectionConfig } from '../models/SectionConfig';
 
 interface CategoriesSectionProps {
   config: SectionConfig;
@@ -13,24 +10,7 @@ interface CategoriesSectionProps {
 
 const CategoriesSection: React.FC<CategoriesSectionProps> = ({ config }) => {
   const navigate = useNavigate();
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const loadCategories = async () => {
-      try {
-        const data = await fetchCategories();
-        setCategories(data);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    loadCategories();
-  }, []);
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
@@ -44,35 +24,41 @@ const CategoriesSection: React.FC<CategoriesSectionProps> = ({ config }) => {
     }
   };
 
-  // Ao clicar em uma categoria, redireciona para produtos filtrados por categoria
-  const handleCategoryClick = (category: Category) => {
-    if (config.sequencia == 1 ) {
-      navigate(`/produtos?=${category.id}`);
+  const handleCategoryClick = (item: SectionItem) => {
+    const produtos = item.produtos || [];
+
+    if (produtos.length === 1) {
+      navigate(`/produto/${produtos[0].id}`, { state: produtos[0] });
+    } else if (produtos.length > 1) {
+      const productIds = produtos.map(p => p.id);
+      navigate('/produtos', { state: { productIds } });
+    } else {
+      console.warn(`Nenhum produto disponível para a categoria "${item.titulo}"`);
     }
   };
-
-  if (isLoading) return <p>Carregando categorias...</p>;
-  if (error) return <p>Erro: {error}</p>;
 
   return (
     <section className="categories">
       {config.tituloVisivel && config.titulo && <h2>{config.titulo}</h2>}
+
       <div className="slider-container">
         <button className="scroll-button left" onClick={scrollLeft}>
           <FaArrowLeft />
         </button>
+
         <div className="category-cards" ref={scrollContainerRef}>
-          {categories.map((cat) => (
-            <div key={cat.id} className="category-card" onClick={() => handleCategoryClick(cat)}>
+          {config.itens.map((item) => (
+            <div key={item.id} className="category-card" onClick={() => handleCategoryClick(item)}>
               <div className="image-wrapper">
-                <img src={cat.imagem} alt={cat.descricao} />
+                <img src={item.imagem} alt={item.titulo} />
               </div>
               <div className="category-description">
-                <h3>{cat.descricao}</h3>
+                <h3>{item.titulo}</h3>
               </div>
             </div>
           ))}
         </div>
+
         <button className="scroll-button right" onClick={scrollRight}>
           <FaArrowRight />
         </button>

@@ -1,6 +1,7 @@
 // src/components/TelaProdutos.tsx
 import React, { useEffect, useState } from "react";
 import { useSearchParams, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Produto } from "../../models/Produto";
 import {
   buscarProdutosPorDescricao,
@@ -13,6 +14,7 @@ import "./TelaProdutos.css";
 
 const TelaProdutos: React.FC = () => {
   const [produtos, setProdutos] = useState<Produto[]>([]);
+  const navigate = useNavigate();
   const [carregando, setCarregando] = useState<boolean>(true);
   const [erro, setErro] = useState<string | null>(null);
 
@@ -96,7 +98,13 @@ const TelaProdutos: React.FC = () => {
         ) : (
           <div className="grid-produtos">
             {produtos.map((produto) => (
-              <ProdutoCard key={produto.id} produto={produto} />
+              <div
+                key={produto.id}
+                onClick={() => navigate(`/produto/${produto.id}`, { state: produto })}
+                style={{ cursor: 'pointer' }}
+              >
+                <ProdutoCard produto={produto} />
+              </div>
             ))}
           </div>
         )}
