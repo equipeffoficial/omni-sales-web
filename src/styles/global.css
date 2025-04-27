@@ -20,7 +20,7 @@ html, body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
+} 
  
 /* Header fixo */
 header {
@@ -30,7 +30,7 @@ header {
   background-color: #eb4848; /* Ajustando para cobrir toda a largura */
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  padding: 15px 0;
+  padding: 0;
   left: 0;
   right: 0;
 }
@@ -92,7 +92,7 @@ header {
 /* Adiciona margem no topo do conteúdo para não ficar coberto pelo header */
 .content {
   flex-grow: 1;
-  padding-top: 5px; /* Garante espaço abaixo do header */
+  padding-top: 0; /* Garante espaço abaixo do header */
   overflow-y: auto;
 }
  

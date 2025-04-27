@@ -2,30 +2,43 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
-import Products from "./pages/Product";
-import Contact from "./pages/Contact";
-import About from "./pages/About";
-import Cart from "./pages/Cart";
-import Categories from "./pages/Categories";
 import Footer from "./components/Footer";
+import TelaProdutos from './pages/TelaProdutos/TelaProdutos';
+import ProductDetail from './pages/ProductDetail';
 
-const App: React.FC = () => {
+ /*const App: React.FC = () => {
   return (
-    <div className="app-container"> {/* Garante que ocupa toda a tela */}
+    <div className="app-container"> 
       <Header />
-      <div className="content"> {/* Expande para empurrar o footer para baixo */}
+      <div className="content">  
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/categories" element={<Categories />} />
+          <Route path="/produtos" element={<TelaProdutos />} />
+          <Route path="/produto/:id" element={<ProductDetail />} />
         </Routes>
       </div>
       <Footer />
     </div>
   );
 };
+
+export default App;   */
+
+
+function App() {
+  return (
+    <div className="app-container">
+      <Header />
+      <main className="content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/produtos" element={<TelaProdutos />} />
+          <Route path="/produto/:id" element={<ProductDetail />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
+  );
+}
 
 export default App;

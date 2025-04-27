@@ -1,0 +1,26 @@
+/* TelaProdutos.css */
+
+.tela-produtos {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .filtros {
+    flex: 0 0 200px;
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+  
+  .lista-produtos {
+    flex: 1;
+  }
+  
+  .grid-produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  

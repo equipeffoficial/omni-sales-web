@@ -4,7 +4,7 @@
   max-width: 1800px;  /* Aumente o valor conforme necessário */
   margin: 0 auto;      /* Centraliza no mesmo padrão do banner */
   text-align: center;
-  padding-top: 20px; 
+  padding-top: 0; 
 }
 
 .categories h2 {
@@ -18,9 +18,6 @@
   position: relative;
   display: flex;
   align-items: center;
-  /* Remover max-width e margin aqui, 
-     pois já estamos definindo no .categories */
-  /* padding: 0 20px;  <- remova se não quiser padding lateral extra */
 }
 
 

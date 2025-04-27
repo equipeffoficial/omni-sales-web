@@ -1,9 +1,9 @@
 /* Seção de Marcas - centralizada e com largura máxima */
 .marcas {
-    max-width: 1200px;     /* Ajuste se quiser mais largo */
+    max-width: 1200px;
     margin: 0 auto;
     text-align: center;
-    padding: 20px 0;       /* Espaço vertical */
+    padding: 40px 0; 
   }
   
   .marcas h2 {
@@ -12,60 +12,54 @@
     color: #333;
   }
   
-  /* Slider que envolve as setas e o container rolável */
   .slider-marcas {
-    position: relative;    /* Para posicionar as setas */
+    position: relative; 
     display: flex;
     align-items: center;
-    justify-content: center; /* Mantém tudo centralizado horizontalmente */
+    justify-content: center; 
   }
   
-  /* Botões de seta */
   .btn-seta {
     background: none;
     border: none;
-    font-size: 1.8rem;     /* Tamanho do ícone */
+    font-size: 1.8rem; 
     cursor: pointer;
     color: #333;
     padding: 10px;
-    z-index: 2;            /* Para ficar acima dos cards */
+    z-index: 2; 
     transition: color 0.3s;
   }
   
   .btn-seta:hover {
-    color: #eb4848;        /* Cor ao passar o mouse */
+    color: #eb4848; 
   }
   
-  /* Ajuste para posicionar as setas (opcional) */
   .seta-esquerda {
-    margin-right: 5px;     /* Pequeno espaço entre seta e lista */
+    margin-right: 5px; 
   }
   
   .seta-direita {
     margin-left: 5px;
   }
   
-  /* Container rolável dos cartões */
   .container-marcas {
     display: flex;
     flex-wrap: nowrap;
-    gap: 15px;             /* Espaço entre as marcas */
-    overflow: hidden;      /* Oculta a barra de rolagem */
+    gap: 15px;
+    overflow: hidden;
     scroll-behavior: smooth;
     padding: 10px 0;
-    max-width: 1000px;     /* Largura visível do "slider" */
+    max-width: 1000px;
   }
   
-  /* Cartão da marca */
   .card-marca {
     flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 90px;           /* Maior que antes, para ficar mais visível */
+    width: 90px; 
   }
   
-  /* Logo da marca - circular com borda */
   .logo-marca {
     width: 80px;
     height: 80px;
@@ -84,7 +78,6 @@
     object-fit: cover;
   }
   
-  /* Nome da marca */
   .nome-marca {
     font-size: 0.85rem;
     margin-top: 8px;

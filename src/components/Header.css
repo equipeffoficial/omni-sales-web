@@ -1,7 +1,7 @@
 /* ----- HEADER ----- */
 .header {
   background-color: #eb4848;
-  padding: 15px 0;
+  padding:  0;
   width: 100%;
   position: sticky;
   top: 0;
@@ -13,16 +13,24 @@
   position: relative; /* Necessário para posicionar o pseudo-elemento */
 }
 
-.header::after {
+/*.header::after {
   content: "";
   position: absolute;
-  bottom: -10px;  /* Ajuste conforme a intensidade do efeito desejado */
+  bottom: -10px; 
   left: 0;
   right: 0;
-  height: 10px;   /* Define a "altura" do efeito */
+  height: 10px; 
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), transparent); 
+}*/
+/*.header::after {
+  content: "";
+  position: absolute;
+  bottom: 0; 
+  left: 0;
+  right: 0;
+  height: 5px; 
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), transparent);
-  /* O gradiente cria o efeito de sombra que dá a impressão de elevação */
-}
+}*/
 
 /* Container do Header */
 .container {

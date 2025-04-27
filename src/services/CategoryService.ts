@@ -1,6 +1,6 @@
 import { Category } from '../models/Category';
 
-const API_URL = 'https://omni-sales-production.up.railway.app/categorias'; // Substitua pela URL real
+const API_URL = 'http://localhost:8080/categorias'; // Substitua pela URL real
 
 export const fetchCategories = async (): Promise<Category[]> => {
   const response = await fetch(API_URL);

@@ -1,22 +1,28 @@
+// src/components/SecaoProdutos.tsx
 import React, { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './SecaoProdutos.css';
 import { Produto } from '../models/Produto';
 import { buscarProdutos } from '../services/ProdutoService';
-import { FaArrowLeft, FaArrowRight, FaBoxOpen, FaTag, FaTrademark } from 'react-icons/fa';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import ProdutoCard from './ProdutoCard';
+import { SectionConfig } from '../models/SectionConfig';
 
-const SecaoProdutos: React.FC = () => {
+interface SecaoProdutosProps {
+  config: SectionConfig;
+}
+
+const SecaoProdutos: React.FC<SecaoProdutosProps> = ({ config }) => {
+  const navigate = useNavigate();
   const [produtos, setProdutos] = useState<Produto[]>([]);
   const [carregando, setCarregando] = useState<boolean>(true);
   const [erro, setErro] = useState<string | null>(null);
-
-  // Referência para o contêiner rolável de produtos
   const containerProdutosRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const carregarProdutos = async () => {
       try {
         const dados = await buscarProdutos();
-        // Se a API retorna um objeto com a chave "produtos"
         setProdutos(dados);
       } catch (err: any) {
         setErro(err.message);
@@ -24,7 +30,6 @@ const SecaoProdutos: React.FC = () => {
         setCarregando(false);
       }
     };
-
     carregarProdutos();
   }, []);
 
@@ -40,47 +45,28 @@ const SecaoProdutos: React.FC = () => {
     }
   };
 
-  if (carregando) {
-    return <p>Carregando produtos...</p>;
-  }
+  // Ao clicar em um produto, verifica a navegação definida na config
+  const handleCardClick = (produto: Produto) => {
+    if (config.id == 2) {
+      navigate(`/produtos?=${produto.id}`);
+       
+    }
+  };
 
-  if (erro) {
-    return <p>Erro: {erro}</p>;
-  }
+  if (carregando) return <p>Carregando produtos...</p>;
+  if (erro) return <p>Erro: {erro}</p>;
 
   return (
     <section className="produtos">
-      <h2>Mais Vendidos</h2>
+      {config.tituloVisivel && config.titulo && <h2>{config.titulo}</h2>}
       <div className="slider-produtos">
         <button className="btn-seta seta-esquerda" onClick={scrollLeft}>
           <FaArrowLeft />
         </button>
         <div className="grade-produtos" ref={containerProdutosRef}>
           {produtos.map((produto) => (
-            <div key={produto.id} className="produto-card">
-              <div className="produto-imagem">
-                <img src={produto.imagemUrl} alt={produto.descricao} />
-              </div>
-              <div className="produto-info">
-                <p className="produto-nome">{produto.descricao}</p>
-                <p className="produto-preco">
-                  R$ {produto.preco.toFixed(2).replace('.', ',')}
-                </p>
-                <div className="produto-detalhes">
-                  <span className="detalhe-container">
-                    <FaBoxOpen className="icone-detalhe" />
-                    <span>{produto.estoque} unidades em estoque</span>
-                  </span>
-                  <span className="detalhe-container">
-                    <FaTag className="icone-detalhe" />
-                    <span>{produto.categoria}</span>
-                  </span>
-                  <span className="detalhe-container">
-                    <FaTrademark className="icone-detalhe" />
-                    <span>{produto.marca}</span>
-                  </span>
-                </div>
-              </div>
+            <div key={produto.id} onClick={() => handleCardClick(produto)}>
+              <ProdutoCard produto={produto} />
             </div>
           ))}
         </div>

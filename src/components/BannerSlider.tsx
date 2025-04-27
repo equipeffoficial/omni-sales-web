@@ -1,43 +1,36 @@
-import React, { useEffect, useState } from "react";
+// src/components/BannerSlider.tsx
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./BannerSlider.css";
-import { Banner } from "../models/Banner";
-import { buscarBanners } from "../services/BannerService";
+import { SectionConfig, SectionItem } from "../models/SectionConfig";
 
-const BannerSlider: React.FC = () => {
-  const [banners, setBanners] = useState<Banner[]>([]);
-  const [carregando, setCarregando] = useState<boolean>(true);
-  const [erro, setErro] = useState<string | null>(null);
+interface BannerSliderProps {
+  config: SectionConfig;
+}
 
-  useEffect(() => {
-    const carregarBanners = async () => {
-      try {
-        const dados = await buscarBanners();
-        setBanners(dados);
-      } catch (err: any) {
-        setErro(err.message);
-      } finally {
-        setCarregando(false);
-      }
-    };
+const BannerSlider: React.FC<BannerSliderProps> = ({ config }) => {
+  const navigate = useNavigate();
 
-    carregarBanners();
-  }, []);
-
-  if (carregando) {
-    return <p>Carregando banners...</p>;
-  }
-
-  if (erro) {
-    return <p>Erro ao carregar banners: {erro}</p>;
-  }
+  const handleItemClick = (item: SectionItem) => {
+    if (item.produtos && item.produtos.length > 0) {
+      // Se houver mais de um produto, navega para a tela de produtos filtrados
+      const productIds = item.produtos.map(prod => prod.id);
+      navigate("/produtos", { state: { productIds } });
+    } else if (item.id) {
+      // Se houver apenas um produto, navega para o detalhe do produto
+      navigate(`/produto/${item.id}`);
+    }
+  };
 
   return (
     <div className="banner-container">
+      {config.tituloVisivel && config.titulo && <h2>{config.titulo}</h2>}
+
       <Swiper
         modules={[Autoplay, Navigation, Pagination]}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -46,9 +39,9 @@ const BannerSlider: React.FC = () => {
         loop
         className="banner-swiper"
       >
-        {banners.map((banner) => (
-          <SwiperSlide key={banner.id}>
-            <img src={banner.imagem} alt={banner.descricao} />
+        {config.itens.map((item, index) => (
+          <SwiperSlide key={index} onClick={() => handleItemClick(item)}>
+            <img src={item.imagem} alt={`Banner ${index + 1}`} />
           </SwiperSlide>
         ))}
       </Swiper>

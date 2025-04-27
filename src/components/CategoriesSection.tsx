@@ -1,15 +1,21 @@
+// src/components/CategoriesSection.tsx
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './CategoriesSection.css';
 import { Category } from '../models/Category';
 import { fetchCategories } from '../services/CategoryService';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { SectionConfig } from '../models/SectionConfig';
 
-const CategoriesSection: React.FC = () => {
+interface CategoriesSectionProps {
+  config: SectionConfig;
+}
+
+const CategoriesSection: React.FC<CategoriesSectionProps> = ({ config }) => {
+  const navigate = useNavigate();
   const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
-  // Referência para o contêiner rolável
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -23,7 +29,6 @@ const CategoriesSection: React.FC = () => {
         setIsLoading(false);
       }
     };
-
     loadCategories();
   }, []);
 
@@ -39,24 +44,26 @@ const CategoriesSection: React.FC = () => {
     }
   };
 
-  if (isLoading) {
-    return <p>Carregando categorias...</p>;
-  }
+  // Ao clicar em uma categoria, redireciona para produtos filtrados por categoria
+  const handleCategoryClick = (category: Category) => {
+    if (config.sequencia == 1 ) {
+      navigate(`/produtos?=${category.id}`);
+    }
+  };
 
-  if (error) {
-    return <p>Erro: {error}</p>;
-  }
+  if (isLoading) return <p>Carregando categorias...</p>;
+  if (error) return <p>Erro: {error}</p>;
 
   return (
     <section className="categories">
-      <h2>Categorias dos produtos</h2>
+      {config.tituloVisivel && config.titulo && <h2>{config.titulo}</h2>}
       <div className="slider-container">
         <button className="scroll-button left" onClick={scrollLeft}>
           <FaArrowLeft />
         </button>
         <div className="category-cards" ref={scrollContainerRef}>
           {categories.map((cat) => (
-            <div key={cat.id} className="category-card">
+            <div key={cat.id} className="category-card" onClick={() => handleCategoryClick(cat)}>
               <div className="image-wrapper">
                 <img src={cat.imagem} alt={cat.descricao} />
               </div>
